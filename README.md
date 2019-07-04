@@ -36,6 +36,9 @@ Example log entry
 
 ./gitlab-parser.go --apijsonlog api_json.log --field host
 
-
+mygitlabserver.com
+mygitlabserver.com
+mygitlabserver.com
+mygitlabserver.com
 
 ```
