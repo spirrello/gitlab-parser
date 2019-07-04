@@ -3,3 +3,7 @@
 
 - Using defined struct to parse api_json.log file
 - Added flag for print specific fields
+
+#### Changed
+
+- Renamed getJSONFileData function to getApiJSONFileData

@@ -31,7 +31,7 @@ type Request struct {
 }
 
 //getJSONFileData extracts the JSON formated data from the file
-func getJSONFileData(apiJSONFileName string) []Request {
+func getApiJSONFileData(apiJSONFileName string) []Request {
 
 	//creat slice for collecting JSON objects
 	var jsonFileSlice []Request
@@ -93,12 +93,11 @@ func main() {
 
 	//Get user intput
 	apiJSONFileName := flag.String("apijsonlog", "api_json.log", "Log file containing API calls.")
-
 	field := flag.String("field", "", "Log file containing API calls.")
 
 	flag.Parse()
 	//Extract json data from the file
-	apiFileData := getJSONFileData(*apiJSONFileName)
+	apiFileData := getApiJSONFileData(*apiJSONFileName)
 
 	//Loop through the returned file data
 	for jsonItem := range apiFileData {
