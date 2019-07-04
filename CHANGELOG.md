@@ -8,3 +8,4 @@
 
 - Renamed getJSONFileData function to getApiJSONFileData
 - Updated README
+- Renamed getApiJSONFileData to getAPIJSONFileData
