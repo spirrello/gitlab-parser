@@ -31,30 +31,25 @@ type Request struct {
 }
 
 //getJSONFileData extracts the JSON formated data from the file
-func getJSONFileData(apiJSONFileName string) { //[]Request {
+func getJSONFileData(apiJSONFileName string) []Request {
 
 	//creat slice for collecting JSON objects
-	//var jsonFileSlice []map[string]interface{}
-	//var jsonFileSlice []Request
-
+	var jsonFileSlice []Request
 	// Open our jsonFile
-	//apiJSONFile, err := os.Open(apiJSONFileName)
 	apiJSONFile, err := ioutil.ReadFile(apiJSONFileName)
-
 	if err != nil {
 		fmt.Println(err)
 	}
 
+	//Loop through the file and decode the json objects
 	for _, line := range bytes.Split(apiJSONFile, []byte{'\n'}) {
 		var request Request
-
 		json.Unmarshal([]byte(line), &request)
-		//fmt.Println(err)
-
-		fmt.Println(request)
+		//append the json objects to a slice
+		jsonFileSlice = append(jsonFileSlice, request)
 	}
 
-	//return jsonFileSlice
+	return jsonFileSlice
 
 }
 
@@ -65,18 +60,17 @@ func getRequestList(apiJSONFileVar *os.File) {
 func main() {
 
 	//Get user intput
-	apiJSONFileName := flag.String("apijsonlog", "api_json.log", "Secret file in json format, 'user', 'secret'")
+	apiJSONFileName := flag.String("apijsonlog", "api_json.log", "Log file containing API calls.")
 
 	//Extract json data from the file
-	//apiFileData := getJSONFileData(*apiJSONFileName)
-	getJSONFileData(*apiJSONFileName)
+	apiFileData := getJSONFileData(*apiJSONFileName)
 
-	//COMMENTING OUT FOR NOW
 	//Loop through the returned file data
-	// for value := range apiFileData {
-	// 	println(value.path)
-	// 	//Print
-	// 	//fmt.Println(reflect.TypeOf(value))
-	// }
+	for jsonItem := range apiFileData {
+		//dereference the struct from the slice.  Printing Severity
+		jsonItemValue := &apiFileData[jsonItem]
+		fmt.Println(jsonItemValue.Severity)
+
+	}
 
 }
