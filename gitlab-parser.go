@@ -106,7 +106,6 @@ func main() {
 
 		//print interesting fields
 		apiJSONLogField(jsonItemValue, field)
-		//fmt.Println(jsonItemValue.Severity)
 
 	}
 
