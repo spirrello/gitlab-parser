@@ -7,3 +7,4 @@
 #### Changed
 
 - Renamed getJSONFileData function to getApiJSONFileData
+- Updated README
