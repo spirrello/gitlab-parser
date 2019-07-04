@@ -57,11 +57,46 @@ func getRequestList(apiJSONFileVar *os.File) {
 
 }
 
+//apiJsonLogField print particular fields
+func apiJSONLogField(jsonItemValue *Request, field *string) {
+
+	switch *field {
+	case "severity":
+		fmt.Println(jsonItemValue.Severity)
+	case "duration":
+		fmt.Println(jsonItemValue.Duration)
+	case "db":
+		fmt.Println(jsonItemValue.Db)
+	case "view":
+		fmt.Println(jsonItemValue.View)
+	case "status":
+		fmt.Println(jsonItemValue.Status)
+	case "method":
+		fmt.Println(jsonItemValue.Method)
+	case "path":
+		fmt.Println(jsonItemValue.Path)
+	case "params":
+		fmt.Println(jsonItemValue.Params)
+	case "host":
+		fmt.Println(jsonItemValue.Host)
+	case "ip":
+		fmt.Println(jsonItemValue.IP)
+	case "ua":
+		fmt.Println(jsonItemValue.Ua)
+	default:
+		fmt.Println(jsonItemValue)
+	}
+
+}
+
 func main() {
 
 	//Get user intput
 	apiJSONFileName := flag.String("apijsonlog", "api_json.log", "Log file containing API calls.")
 
+	field := flag.String("field", "", "Log file containing API calls.")
+
+	flag.Parse()
 	//Extract json data from the file
 	apiFileData := getJSONFileData(*apiJSONFileName)
 
@@ -69,7 +104,10 @@ func main() {
 	for jsonItem := range apiFileData {
 		//dereference the struct from the slice.  Printing Severity
 		jsonItemValue := &apiFileData[jsonItem]
-		fmt.Println(jsonItemValue.Severity)
+
+		//print interesting fields
+		apiJSONLogField(jsonItemValue, field)
+		//fmt.Println(jsonItemValue.Severity)
 
 	}
 
